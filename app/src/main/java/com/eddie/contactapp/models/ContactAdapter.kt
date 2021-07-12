@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eddie.contactapp.databinding.ContactItemBinding
 
-class ContactAdapter (var contacts : List<Contact>, val mover: (Contact) -> Unit) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(){
+class ContactAdapter(var contacts : List<Contact>, val mover: (Contact) -> Unit )
+    : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(){
 
-    inner class ContactViewHolder(private val gumming: ContactItemBinding ) : RecyclerView.ViewHolder(gumming.root){
+    inner class ContactViewHolder(private val gumming: ContactItemBinding)
+        : RecyclerView.ViewHolder(gumming.root){
         fun gumContact(contact: Contact){
             gumming.apply {
                 contactIdDisplay.text = contact.id.toString()
