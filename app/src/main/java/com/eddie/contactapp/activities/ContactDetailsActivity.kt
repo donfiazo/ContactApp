@@ -15,11 +15,11 @@ class ContactDetailsActivity : AppCompatActivity() {
         setContentView(gumming.root)
 
         gumming.run {
-            contactIdTv.text = intent.getIntExtra("S/N", 0).toString()
             firstnameTv.text = intent.getStringExtra("First Name")
             lastnameTv.text = intent.getStringExtra("Last Name")
-            phoneNumberTv.text = intent.getStringExtra("Phone Number")
+            phoneNumberTv.text = intent.getStringExtra("Phone Number").toString()
             emailTv.text = intent.getStringExtra("E-Mail")
+            emailTv.text = intent.getStringExtra("Email")
 
         }
     }

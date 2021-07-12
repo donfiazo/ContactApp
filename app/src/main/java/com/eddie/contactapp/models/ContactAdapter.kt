@@ -15,7 +15,7 @@ class ContactAdapter(var contacts : List<Contact>, val mover: (Contact) -> Unit 
                 contactIdDisplay.text = contact.id.toString()
                 fnameDisplay.text = contact.firstName
                 lnameDisplay.text = contact.lastName
-                phonenumberDisplay.text = contact.Phone.toString()
+                phonenumberDisplay.text = contact.Phone
                 emailDisplay.text = contact.Email
                 root.setOnClickListener { mover(contact) }
 

@@ -25,18 +25,17 @@ class MainActivity : AppCompatActivity() {
         gumming = ActivityMainBinding.inflate(layoutInflater)
         setContentView(gumming.root)
 
-        database = Room.databaseBuilder(
-            applicationContext, ContactDatabase::class.java,
+        database = Room.databaseBuilder(this, ContactDatabase::class.java,
             "contacts_database"
         ).allowMainThreadQueries().build()
 
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         viewModel.getContacts(database)
 
-        contactAdapter = ContactAdapter(listOf<Contact>()) {
+        contactAdapter = ContactAdapter(database.contactDao().getAllContacts()){
+
             val intent = Intent(this@MainActivity, ContactDetailsActivity::class.java)
             intent.run {
-                putExtra("Contact id", it.id)
                 putExtra("First Name", it.firstName)
                 putExtra("Last Name", it.lastName)
                 putExtra("Phone Number", it.Phone)
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         gumming.saveButton.setOnClickListener {
             val firstname = gumming.fnameInput.text.toString()
             val lastname = gumming.lnameInput.text.toString()
-            val phone = gumming.phonenumberInput.text.hashCode()
+            val phone = gumming.phonenumberInput.text.toString()
             val email = gumming.emailInput.text.toString()
 
             saveContact(firstname, lastname, phone, email)
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveContact(firstname: String, lastname: String, phone: Int, email: String) {
+    private fun saveContact(firstname: String, lastname: String, phone: String, email: String) {
         val contact = Contact(id = 0, firstname, lastname, phone, email)
         viewModel.addContact(database,contact)
     }
